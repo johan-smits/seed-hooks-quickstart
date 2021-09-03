@@ -4,8 +4,8 @@
 #![allow(clippy::wildcard_imports)]
 
 mod button;
-mod state;
 mod label;
+mod state;
 
 use button::button;
 use label::label;
@@ -36,12 +36,10 @@ struct Main {}
 // (Remove the line below once any of your `Msg` variants doesn't implement `Copy`.)
 #[derive(Copy, Clone)]
 // `Msg` describes the different events you can modify state with.
-enum Msg {
-}
+enum Msg {}
 
 // `update` describes how to handle each `Msg`.
-fn update(_msg: Msg, _model: &mut Main, _: &mut impl Orders<Msg>) {
-}
+fn update(_msg: Msg, _model: &mut Main, _: &mut impl Orders<Msg>) {}
 
 // ------ ------
 //     View
