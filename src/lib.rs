@@ -1,8 +1,14 @@
-#![feature(track_caller)]
 // (Lines like the one below ignore selected Clippy rules
 //  - it's useful when you want to check your code with `cargo make verify`
 // but some rules are too "annoying" or are not applicable for your case.)
 #![allow(clippy::wildcard_imports)]
+
+mod button;
+mod state;
+mod label;
+
+use button::button;
+use label::label;
 
 use seed::{prelude::*, *};
 use seed_hooks::*;
@@ -12,8 +18,8 @@ use seed_hooks::*;
 // ------ ------
 
 // `init` describes what should happen when your app started.
-fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
-    Model{}
+fn init(_: Url, _: &mut impl Orders<Msg>) -> Main {
+    Main {}
 }
 
 // ------ ------
@@ -21,7 +27,7 @@ fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
 // ------ ------
 
 // `Model` describes our app state.
-struct Model{}
+struct Main {}
 
 // ------ ------
 //    Update
@@ -34,7 +40,7 @@ enum Msg {
 }
 
 // `update` describes how to handle each `Msg`.
-fn update(_msg: Msg, _model: &mut Model, _: &mut impl Orders<Msg>) {
+fn update(_msg: Msg, _model: &mut Main, _: &mut impl Orders<Msg>) {
 }
 
 // ------ ------
@@ -43,11 +49,14 @@ fn update(_msg: Msg, _model: &mut Model, _: &mut impl Orders<Msg>) {
 
 // `view` describes what to display.
 #[topo::nested]
-fn view(_model: &Model) -> Node<Msg> {
-    let count = use_state(||0);
+fn view(_model: &Main) -> Node<Msg> {
+    // let count = use_state(||0);
     div![
         "This is a counter: ",
-        button!["The count is ", count, count.on_click(|c| *c +=1 )],
+        button(),
+        hr![],
+        "Which contains data of:",
+        label()
     ]
 }
 
