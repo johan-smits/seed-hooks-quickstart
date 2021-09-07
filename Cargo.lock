@@ -22,7 +22,7 @@ checksum = "33954243bd79057c2de7338850b85983a44588021f8a5fee574a8888c6de4344"
 [[package]]
 name = "atomic_hooks"
 version = "0.1.6"
-source = "git+https://github.com/seed-rs/styles_hooks.git#62a3ef94266b1d802a1c7b47208859983fd59b69"
+source = "git+https://github.com/seed-rs/styles_hooks.git?branch=main#056367c663230defe991b36b35a92e4663b7a2f0"
 dependencies = [
  "anymap",
  "atomic_hooks_macros",
@@ -35,7 +35,7 @@ dependencies = [
 [[package]]
 name = "atomic_hooks_macros"
 version = "0.1.6"
-source = "git+https://github.com/seed-rs/styles_hooks.git#62a3ef94266b1d802a1c7b47208859983fd59b69"
+source = "git+https://github.com/seed-rs/styles_hooks.git?branch=main#056367c663230defe991b36b35a92e4663b7a2f0"
 dependencies = [
  "darling",
  "illicit",
@@ -688,7 +688,7 @@ checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
 [[package]]
 name = "seed"
 version = "0.8.0"
-source = "git+https://github.com/seed-rs/seed?branch=master#a60181edc329dec4fc3aa15da48850e568f27bc5"
+source = "git+https://github.com/seed-rs/seed.git?branch=master#a60181edc329dec4fc3aa15da48850e568f27bc5"
 dependencies = [
  "console_error_panic_hook",
  "cookie",
@@ -713,7 +713,7 @@ dependencies = [
 [[package]]
 name = "seed_hooks"
 version = "0.1.5"
-source = "git+https://github.com/seed-rs/styles_hooks.git#62a3ef94266b1d802a1c7b47208859983fd59b69"
+source = "git+https://github.com/seed-rs/styles_hooks.git?branch=main#056367c663230defe991b36b35a92e4663b7a2f0"
 dependencies = [
  "atomic_hooks",
  "derive_more",
@@ -823,9 +823,12 @@ checksum = "c307a32c1c5c437f38c7fd45d753050587732ba8628319fbdf12a7e289ccc590"
 
 [[package]]
 name = "slotmap"
-version = "0.4.3"
+version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6bf34684c5767b87de9119790e92e9a1d60056be2ceeaf16a8e6ef13082aeab1"
+checksum = "e1e08e261d0e8f5c43123b7adf3e4ca1690d655377ac93a03b2c9d3e98de1342"
+dependencies = [
+ "version_check 0.9.3",
+]
 
 [[package]]
 name = "smallvec"
@@ -905,9 +908,9 @@ checksum = "6446ced80d6c486436db5c078dde11a9f73d42b57fb273121e160b84f63d894c"
 
 [[package]]
 name = "syn"
-version = "1.0.75"
+version = "1.0.76"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b7f58f7e8eaa0009c5fec437aabf511bd9933e4b2d7407bd05273c01a8906ea7"
+checksum = "c6f107db402c2c2055242dbf4d2af0e69197202e9faacbef9571bbe47f5a1b84"
 dependencies = [
  "proc-macro2",
  "quote",
