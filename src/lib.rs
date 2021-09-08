@@ -5,11 +5,11 @@
 
 mod button;
 mod label;
+mod page;
+mod routes;
 mod state;
 
-use button::button;
-use label::label;
-
+use crate::routes::Page;
 use seed::{prelude::*, *};
 use seed_hooks::*;
 
@@ -18,8 +18,14 @@ use seed_hooks::*;
 // ------ ------
 
 // `init` describes what should happen when your app started.
-fn init(_: Url, _: &mut impl Orders<Msg>) -> Main {
-    Main {}
+fn init(url: Url, orders: &mut impl Orders<Msg>) -> Main {
+    log!(url);
+    orders.subscribe(Msg::UrlChanged);
+
+    Main {
+        base_url: url.to_hash_base_url(),
+        page: Page::init(url),
+    }
 }
 
 // ------ ------
@@ -27,19 +33,28 @@ fn init(_: Url, _: &mut impl Orders<Msg>) -> Main {
 // ------ ------
 
 // `Model` describes our app state.
-struct Main {}
+pub struct Main {
+    base_url: Url,
+    page: Page,
+}
 
 // ------ ------
 //    Update
 // ------ ------
 
-// (Remove the line below once any of your `Msg` variants doesn't implement `Copy`.)
-#[derive(Copy, Clone)]
 // `Msg` describes the different events you can modify state with.
-enum Msg {}
+enum Msg {
+    UrlChanged(subs::UrlChanged),
+}
 
 // `update` describes how to handle each `Msg`.
-fn update(_msg: Msg, _model: &mut Main, _: &mut impl Orders<Msg>) {}
+fn update(msg: Msg, model: &mut Main, _: &mut impl Orders<Msg>) {
+    match msg {
+        Msg::UrlChanged(subs::UrlChanged(url)) => {
+            model.page = Page::init(url);
+        }
+    }
+}
 
 // ------ ------
 //     View
@@ -47,15 +62,13 @@ fn update(_msg: Msg, _model: &mut Main, _: &mut impl Orders<Msg>) {}
 
 // `view` describes what to display.
 #[topo::nested]
-fn view(_model: &Main) -> Node<Msg> {
-    // let count = use_state(||0);
-    div![
-        "This is a counter: ",
-        button(),
-        hr![],
-        "Which contains data of:",
-        label()
-    ]
+fn view(model: &Main) -> Node<Msg> {
+    let base_url = model.base_url.clone();
+    match model.page {
+        Page::Home => page::home(base_url),
+        Page::Admin => page::admin(base_url),
+        Page::NotFound => page::not_found(),
+    }
 }
 
 // ------ ------
