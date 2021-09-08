@@ -10,7 +10,7 @@ mod routes;
 mod state;
 
 use crate::routes::Page;
-use seed::{prelude::*, *};
+use seed::{prelude::*};
 use seed_hooks::*;
 
 // ------ ------
@@ -19,9 +19,7 @@ use seed_hooks::*;
 
 // `init` describes what should happen when your app started.
 fn init(url: Url, orders: &mut impl Orders<Msg>) -> Main {
-    log!(url);
     orders.subscribe(Msg::UrlChanged);
-
     Main {
         base_url: url.to_hash_base_url(),
         page: Page::init(url),

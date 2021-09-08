@@ -11,9 +11,7 @@ pub fn admin<Ms: 'static>(base_url: Url) -> Node<Ms> {
         button(),
         button![
             "Home",
-            ev(Ev::Click, move |_| Urls::new(base_url)
-                .home()
-                .go_and_load())
+            ev(Ev::Click, move |_| Urls::new(base_url).home().go_and_load())
         ]
     ]
 }
@@ -32,7 +30,7 @@ pub fn home<Ms: 'static>(base_url: Url) -> Node<Ms> {
             ev(Ev::Click, |_| Urls::new(base_url)
                 .admin_urls()
                 .go_and_load())
-        ]
+        ],
     ]
 }
 
