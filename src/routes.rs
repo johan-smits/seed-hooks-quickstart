@@ -1,7 +1,8 @@
 use seed::{prelude::*, *};
 
 pub const HOME: &str = "home";
-pub const ADMIN: &str = "admin/dash";
+pub const ADMIN: &str = "admin";
+pub const ADMIN_DASH: &str = "dash";
 
 // ------ ------
 //     Urls
@@ -13,7 +14,7 @@ impl<'a> Urls<'a> {
         self.base_url().add_hash_path_part(HOME)
     }
     pub fn admin_urls(self) -> Url {
-        self.base_url().add_hash_path_part(ADMIN)
+        self.base_url().add_hash_path_part(ADMIN).add_hash_path_part(ADMIN_DASH)
     }
 }
 
