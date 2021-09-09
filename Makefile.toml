@@ -9,6 +9,7 @@ skip_core_tasks = true
 [tasks.watch]
 description = "Watch files and recompile the project on change"
 run_task = [
+    { name = "index_html" },
     { name = "build_sass" },
     { name = "build" },
 ]
@@ -18,13 +19,18 @@ watch = true
 description = "Start server"
 install_crate = { crate_name = "microserver", binary = "microserver", test_arg = "-h" }
 command = "microserver"
-args = ["--port", "${PORT}"]
+args = ["--port", "${PORT}", "pkg"]
 
 [tasks.verify]
 description = "Format, lint with Clippy and run tests"
 dependencies = ["fmt", "clippy", "test_h_firefox"]
 
 # ---- BUILD ----
+
+[tasks.index_html]
+description = "Copy index.html"
+command = "cp"
+args = ["index.html", "pkg/index.html"]
 
 [tasks.build_sass]
 description = "Build with grass"
@@ -43,13 +49,14 @@ description = "Build with wasm-pack"
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
 command = "wasm-pack"
 args = ["build", "--target", "web", "--out-name", "package", "--dev"]
+dependencies = ["index_html", "build_sass_release"]
 
 [tasks.build_release]
 description = "Build with wasm-pack in release mode"
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
 command = "wasm-pack"
 args = ["build", "--target", "web", "--out-name", "package"]
-dependencies = ["build_sass_release"]
+dependencies = ["index_html", "build_sass_release"]
 
 [tasks.start]
 description = "Combine the build and serve tasks"
